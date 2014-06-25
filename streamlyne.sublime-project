@@ -5,5 +5,9 @@
 			"follow_symlinks": true,
 			"path": "."
 		}
-	]
+	],
+	"settings":
+	{
+		"python_interpreter": "D:\\\\Python\\\\python.exe"
+	}
 }
