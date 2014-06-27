@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"app",
+				"append"
+			],
+			[
+				"p",
+				"paragraphs	function"
+			],
+			[
+				"asy",
+				"async_res	statement"
+			],
+			[
 				"P",
 				"PdfFileWriter	class"
 			],
@@ -84,13 +96,34 @@
 	"buffers":
 	[
 		{
-			"contents": "import sys\nimport pymongo\nfrom pymongo import MongoClient\nfrom PyPDF2 import PdfFileReader\n\nclient = MongoClient()\ndb = client.stream_db\ndbIndex = db.stream\n\n\ndef main():\n    path = sys.argv[2]\n    plen = len(path)\n\n    if sys.argv[1] == \"index\":\n        if path.lower().endswith(\".pdf\"):\n            index(path, \".pdf\")\n        elif path.lower().endswith(\".docx\"):\n            index(path, \".docx\")\n        elif path.lower().endswith(\".html\"):\n            index(path, \".html\")\n        elif path.lower().endswith(\".txt\"):\n            index(path, \".txt\")\n        else:\n            print \"Error: Only .pdf,.docx,.html or .txt supported.\"\n            sys.exit()\n    elif sys.argv[1] == \"search\":\n        search()\n    else:\n        print \"Error: index OR search must be first argument\"\n        sys.exit()\n\n\ndef index(path, fType):\n    text = \"\"\n    if fType == \".txt\":\n        f = open(path, 'r')\n        text = f.read()\n    # unicode(text['txt'], errors = 'replace')\n    dbIndex.ensure_index([\n        ('txt', pymongo.TEXT),\n        ('fType', pymongo.TEXT),\n        ('path', pymongo.TEXT)\n    ],\n        weights={\n        'path': 100,\n        'txt': 25\n    	}\n    )\n    dbIndex.insert({'txt':text, 'fType':fType, 'path':path})\n    \n    cursor = dbIndex.find()\n    for c in cursor:\n        print c\n\n    \"\"\"\n    if fType == \".pdf\":\n        pdf = PdfFileReader(open(path, \"rb\"))\n        for page in pdf.pages:\n            text.append(page.extractText())\n    print text\n	\"\"\"\n\n\ndef search(obj):\n    print obj\n\nmain()\n",
-			"file": "streamlyne.py",
-			"file_size": 1572,
-			"file_write_time": 130480476625565713,
+			"file": "project/streamlyne.py",
 			"settings":
 			{
-				"buffer_size": 1508,
+				"buffer_size": 1135,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "project/tasks.py",
+			"settings":
+			{
+				"buffer_size": 1687,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Daniel/AppData/Roaming/RabbitMQ/log/rabbit@UNIT.log",
+			"settings":
+			{
+				"buffer_size": 64684,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "project/__init__.py",
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -98,15 +131,19 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 490.0,
+		"height": 269.0,
 		"selected_items":
 		[
 			[
-				"",
+				"auto",
 				"Anaconda: Autoformat PEP8 Errors"
 			],
 			[
-				"auto",
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"",
 				"Anaconda: Autoformat PEP8 Errors"
 			],
 			[
@@ -123,10 +160,6 @@
 			],
 			[
 				"inst",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -266,6 +299,14 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/D/coding/StreamLyneAssignment/celery.py",
+		"/D/coding/StreamLyneAssignment/streamlyne.py",
+		"/D/Sublime Text 3/Packages/Theme - Default.sublime-package",
+		"/D/coding/StreamLyneAssignment/project/streamlyne.py",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Theme - Default/Default.sublime-theme",
+		"/C/Users/Daniel/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
 		"/D/Python/Lib/site.py",
 		"/D/coding/StreamLyneAssignment/PyPDF2/__init__.py",
 		"/D/coding/StreamLyneAssignment/PyPDF2/pdf.py",
@@ -297,7 +338,6 @@
 		"/D/XAMPP/apps/wordpress/htdocs/wp-content/index.php",
 		"/D/XAMPP/apps/wordpress/htdocs/wp-content/themes/index.php",
 		"/D/XAMPP/apps/wordpress/htdocs/wp-content/plugins/wp-user-frontend/admin/custom-fields.php",
-		"/D/coding/StreamLyneAssignment/streamlyne.py",
 		"/D/XAMPP/apps/wordpress/htdocs/wp-content/themes/tungsten/woocommerce.php",
 		"/D/coding/webContra/js/Enemy.js",
 		"/D/coding/webContra/js/contra.js",
@@ -365,7 +405,7 @@
 	],
 	"find":
 	{
-		"height": 58.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -381,6 +421,13 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"spaces",
+			"tabs_",
+			"tabs",
+			"fon",
+			"font",
+			"tabs_to",
+			"tabs",
 			"easyinstall",
 			"easy_install",
 			"wpuf-author",
@@ -432,8 +479,8 @@
 			"game",
 			"bg"
 		],
-		"highlight": false,
-		"in_selection": true,
+		"highlight": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": true,
 		"replace_history":
@@ -453,24 +500,253 @@
 			[
 				{
 					"buffer": 0,
-					"file": "streamlyne.py",
+					"file": "project/streamlyne.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1508,
+						"buffer_size": 1135,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1227,
-								1227
+								689,
+								689
 							]
 						],
 						"settings":
 						{
-							"SideBarAutoAddFoldersForOpenedFiles": 1,
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "project/tasks.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1687,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								762,
+								762
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close"
+							],
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -578,10 +854,266 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
+						"translation.y": 375.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Daniel/AppData/Roaming/RabbitMQ/log/rabbit@UNIT.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 64684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3825.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "project/__init__.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -589,7 +1121,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 58.0
+		"height": 33.0
 	},
 	"input":
 	{
@@ -629,7 +1161,7 @@
 	"project": "streamlyne.sublime-project",
 	"replace":
 	{
-		"height": 84.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
